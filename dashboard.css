@@ -1,0 +1,709 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --success-color: #27ae60;
+    --warning-color: #f39c12;
+    --text-color: #2c3e50;
+    --light-text: #7f8c8d;
+    --background-color: #ecf0f1;
+    --card-background: #ffffff;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    background: var(--background-color);
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: var(--card-background);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary-color);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#teacherName {
+    font-weight: 500;
+    color: var(--text-color);
+    position: relative;
+    padding-left: 25px;
+}
+
+#teacherName::before {
+    content: '👨‍🏫';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#logoutBtn {
+    padding: 10px 20px;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+#logoutBtn:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+}
+
+nav {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    background: var(--card-background);
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+}
+
+.nav-btn {
+    padding: 12px 25px;
+    background: transparent;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--light-text);
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav-btn.active {
+    background: var(--secondary-color);
+    color: white;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.2);
+}
+
+.section {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.section.active {
+    display: block;
+}
+
+/* Calendar Styles */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: var(--card-background);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--success-color);
+}
+
+#currentMonthYear {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+#prevMonth, #nextMonth {
+    padding: 10px 20px;
+    background: var(--background-color);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--text-color);
+    transition: var(--transition);
+}
+
+#prevMonth:hover, #nextMonth:hover {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    padding: 15px;
+    border: 2px solid transparent;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--card-background);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.calendar-day::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--secondary-color);
+    transform: scaleX(0);
+    transition: var(--transition);
+}
+
+.calendar-day:hover::before {
+    transform: scaleX(1);
+}
+
+.calendar-day.weekend {
+    background: #f8f9fa;
+    color: var(--light-text);
+}
+
+.calendar-day.holiday {
+    background: #fef9e7;
+    color: var(--warning-color);
+}
+
+.calendar-day.vacation {
+    background: #e8f8f5;
+    color: var(--success-color);
+}
+
+.calendar-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+#markHoliday, #markVacation {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+#markHoliday {
+    background: var(--warning-color);
+    color: white;
+}
+
+#markVacation {
+    background: var(--success-color);
+    color: white;
+}
+
+#markHoliday:hover, #markVacation:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(44, 62, 80, 0.8);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: var(--card-background);
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: var(--shadow);
+    animation: slideUp 0.3s ease;
+    border-left: 5px solid var(--secondary-color);
+}
+
+/* Class List Styles */
+.class-card {
+    background: var(--card-background);
+    border: 2px solid transparent;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--success-color);
+}
+
+.class-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.class-card h3 {
+    color: var(--text-color);
+    margin-bottom: 10px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.class-card h3::before {
+    content: '🏫';
+}
+
+.class-card p {
+    color: var(--light-text);
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.class-card p::before {
+    content: '📅';
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 15px;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .calendar-grid {
+        gap: 10px;
+    }
+
+    .calendar-day {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .calendar-actions {
+        flex-direction: column;
+    }
+
+    .class-actions {
+        flex-direction: column;
+    }
+
+    #createClass {
+        width: 100%;
+    }
+
+    .student-actions {
+        flex-direction: column;
+    }
+
+    #addStudent, #deleteClass {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        flex-direction: column;
+    }
+
+    .nav-btn {
+        width: 100%;
+    }
+
+    .modal-content {
+        padding: 20px;
+    }
+}
+
+/* Class Management Buttons */
+.class-actions {
+    margin-bottom: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+#createClass {
+    padding: 15px 30px;
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+
+#createClass:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.student-actions {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+#addStudent {
+    flex: 1;
+    padding: 12px 20px;
+    background: var(--success-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+
+#addStudent:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+}
+
+#deleteClass {
+    flex: 1;
+    padding: 12px 20px;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+
+#deleteClass:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+}
+
+/* Add icons to buttons */
+#createClass::before {
+    content: '📚';
+    margin-right: 8px;
+}
+
+#addStudent::before {
+    content: '👨‍🎓';
+    margin-right: 8px;
+}
+
+#deleteClass::before {
+    content: '🗑️';
+    margin-right: 8px;
+}
+
+/* Student List Styles */
+.student-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: var(--card-background);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border-left: 4px solid var(--secondary-color);
+}
+
+.student-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.student-item span {
+    font-size: 16px;
+    color: var(--text-color);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.student-item span::before {
+    content: '👨‍🎓';
+    font-size: 18px;
+}
+
+.student-item button {
+    padding: 8px 15px;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.student-item button::before {
+    content: '🗑️';
+    font-size: 14px;
+}
+
+.student-item button:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+}
+
+/* Student Modal Styles */
+#studentModal .modal-content {
+    max-width: 600px;
+}
+
+#studentModal h2 {
+    color: var(--text-color);
+    margin-bottom: 20px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#studentModal h2::before {
+    content: '👥';
+    font-size: 24px;
+}
+
+#studentsList {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+#studentsList::-webkit-scrollbar {
+    width: 8px;
+}
+
+#studentsList::-webkit-scrollbar-track {
+    background: var(--background-color);
+    border-radius: 4px;
+}
+
+#studentsList::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 4px;
+}
+
+#studentsList::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+/* Modal Header Styles */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    padding: 8px 15px;
+    background: var(--background-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.back-btn:hover {
+    background: var(--secondary-color);
+    color: white;
+    transform: translateX(-3px);
+}
+
+/* Attendance Styles */
+.attendance-list {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.attendance-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: var(--card-background);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.attendance-options {
+    display: flex;
+    gap: 10px;
+}
+
+.attendance-options button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.attendance-options .present {
+    background: var(--success-color);
+    color: white;
+}
+
+.attendance-options .absent {
+    background: var(--accent-color);
+    color: white;
+}
+
+.attendance-options button.active {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-day.attendance-marked {
+    background: var(--success-color);
+    color: white;
+    position: relative;
+}
+
+.calendar-day.attendance-marked::after {
+    content: '✓';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 12px;
+}
+
+/* Download Button Styles */
+#downloadAttendance {
+    padding: 12px 25px;
+    background: var(--success-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: var(--shadow);
+}
+
+#downloadAttendance::before {
+    content: '📥';
+    font-size: 18px;
+}
+
+#downloadAttendance:hover {
+    background: #219a52;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(33, 154, 82, 0.3);
+}
+
+#downloadAttendance:active {
+    transform: translateY(0);
+}
+
+/* PDF Table Styles */
+.pdf-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+.pdf-table th, .pdf-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.pdf-table th {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+}
+
+.pdf-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.pdf-table tr:hover {
+    background-color: #f5f5f5;
+} 

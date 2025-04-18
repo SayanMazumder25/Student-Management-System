@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header>
+            <h1>Teacher Dashboard</h1>
+            <div class="user-info">
+                <span id="teacherName"></span>
+                <button id="logoutBtn">Logout</button>
+            </div>
+        </header>
+
+        <nav>
+            <button class="nav-btn active" data-section="calendar">Calendar</button>
+            <button class="nav-btn" data-section="class-management">Class Management</button>
+        </nav>
+
+        <main>
+            <!-- Calendar Section -->
+            <section id="calendar-section" class="section active">
+                <div class="calendar-header">
+                    <button id="prevMonth">&lt;</button>
+                    <h2 id="currentMonthYear"></h2>
+                    <button id="nextMonth">&gt;</button>
+                </div>
+                <div class="calendar-grid" id="calendarGrid"></div>
+                <div class="calendar-actions">
+                    <button id="markHoliday">Mark Holiday</button>
+                    <button id="markVacation">Mark Vacation</button>
+                    <button id="downloadAttendance">Download Attendance</button>
+                </div>
+            </section>
+
+            <!-- Class Management Section -->
+            <section id="class-management-section" class="section">
+                <div class="class-actions">
+                    <button id="createClass">Create New Class</button>
+                </div>
+                <div id="classesList"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Class Creation Modal -->
+    <div id="classModal" class="modal">
+        <div class="modal-content">
+            <h2>Create New Class</h2>
+            <form id="classForm">
+                <div class="form-group">
+                    <label for="className">Class Name</label>
+                    <input type="text" id="className" required>
+                </div>
+                <div class="form-group">
+                    <label for="section">Section</label>
+                    <input type="text" id="section" required>
+                </div>
+                <div class="form-group">
+                    <label for="academicYear">Academic Year</label>
+                    <input type="text" id="academicYear" required>
+                </div>
+                <button type="submit" class="btn">Create Class</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Student Management Modal -->
+    <div id="studentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Manage Students</h2>
+                <button id="backToClasses" class="back-btn">← Back to Classes</button>
+            </div>
+            <div class="student-actions">
+                <button id="addStudent">Add Student</button>
+                <button id="deleteClass">Delete Class</button>
+            </div>
+            <div id="studentsList"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html> 
